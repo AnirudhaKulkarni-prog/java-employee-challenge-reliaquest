@@ -1,0 +1,11 @@
+{
+  "status": "Successfully processed request.",
+  "data": {
+    "id": "3fa85f64-5717-4562-b3fc-2c963f66afa6",
+    "employee_name": "Jill",
+    "employee_salary": 2000,
+    "employee_age": 32,
+    "employee_title": "Manager",
+    "employee_email": "jillj@company.com"
+  }
+}

@@ -3,6 +3,7 @@ package com.reliaquest.api.controller;
 import com.reliaquest.api.model.Employee;
 import com.reliaquest.api.model.EmployeeInput;
 import com.reliaquest.api.service.EmployeeService;
+import jakarta.validation.Valid;
 import java.util.List;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -43,7 +44,8 @@ public class EmployeeController implements IEmployeeController<Employee, Employe
     }
 
     @Override
-    public ResponseEntity<Employee> createEmployee(@RequestBody EmployeeInput employeeInput) {
+    public ResponseEntity<Employee> createEmployee(@RequestBody @Valid EmployeeInput employeeInput) {
+
         return ResponseEntity.ok(service.createEmployee(employeeInput));
     }
 

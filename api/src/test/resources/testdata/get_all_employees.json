@@ -1,0 +1,29 @@
+{
+  "status": "Successfully processed request.",
+  "data": [
+    {
+      "id": "1a2b3c4d-1111-2222-3333-444455556666",
+      "employee_name": "Alice",
+      "employee_salary": 5000,
+      "employee_age": 30,
+      "employee_title": "Engineer",
+      "employee_email": "alice@company.com"
+    },
+    {
+      "id": "1a2b3c4d-7777-8888-9999-000011112222",
+      "employee_name": "Bob",
+      "employee_salary": 4500,
+      "employee_age": 28,
+      "employee_title": "Analyst",
+      "employee_email": "bob@company.com"
+    },
+    {
+      "id": "d9c77364-bf4e-4e3b-900f-7f7a12ac9e99",
+      "employee_name": "Charlie",
+      "employee_salary": 4700,
+      "employee_age": 35,
+      "employee_title": "Consultant",
+      "employee_email": "charlie@company.com"
+    }
+  ]
+}

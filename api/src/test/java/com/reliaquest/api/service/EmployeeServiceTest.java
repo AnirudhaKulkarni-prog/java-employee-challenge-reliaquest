@@ -5,6 +5,7 @@ import static org.mockito.Mockito.*;
 
 import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
+import com.reliaquest.api.exception.EmployeeServiceException;
 import com.reliaquest.api.model.Employee;
 import com.reliaquest.api.model.EmployeeInput;
 import java.util.*;
@@ -107,7 +108,8 @@ class EmployeeServiceTest {
         when(restTemplate.postForEntity(anyString(), any(), eq(JsonNode.class)))
                 .thenThrow(new RuntimeException("Timeout"));
 
-        RuntimeException ex = assertThrows(RuntimeException.class, () -> employeeService.createEmployee(sampleInput));
+        EmployeeServiceException ex =
+                assertThrows(EmployeeServiceException.class, () -> employeeService.createEmployee(sampleInput));
 
         assertEquals("Unable to create employee", ex.getMessage());
     }
@@ -127,8 +129,8 @@ class EmployeeServiceTest {
         when(restTemplate.getForEntity(anyString(), eq(JsonNode.class)))
                 .thenThrow(new RuntimeException("Server error"));
 
-        RuntimeException ex = assertThrows(RuntimeException.class, () -> employeeService.getAllEmployees());
-
+        EmployeeServiceException ex =
+                assertThrows(EmployeeServiceException.class, () -> employeeService.getAllEmployees());
         assertEquals("Unable to fetch employees", ex.getMessage());
     }
 
@@ -146,7 +148,7 @@ class EmployeeServiceTest {
         when(restTemplate.getForEntity(anyString(), eq(JsonNode.class)))
                 .thenThrow(new HttpClientErrorException(HttpStatus.NOT_FOUND));
 
-        assertThrows(RuntimeException.class, () -> employeeService.getEmployeeById("non-existent-id"));
+        assertThrows(EmployeeServiceException.class, () -> employeeService.getEmployeeById("non-existent-id"));
     }
 
     @Test
@@ -174,7 +176,16 @@ class EmployeeServiceTest {
         when(restTemplate.exchange(anyString(), eq(HttpMethod.DELETE), any(), eq(JsonNode.class)))
                 .thenThrow(new RuntimeException("Internal error"));
 
-        assertThrows(RuntimeException.class, () -> employeeService.deleteEmployee("some-id"));
+        assertThrows(EmployeeServiceException.class, () -> employeeService.deleteEmployee("some-id"));
+    }
+
+    @Test
+    void testGetEmployeesByNameSearch_noMatch() {
+        when(restTemplate.getForEntity(anyString(), eq(JsonNode.class)))
+                .thenReturn(ResponseEntity.ok(employeeListJson));
+
+        List<Employee> result = employeeService.getEmployeesByNameSearch("Z"); // No such name
+        assertTrue(result.isEmpty());
     }
 
     @Test
@@ -203,5 +214,23 @@ class EmployeeServiceTest {
 
         List<String> topEarners = employeeService.getTopTenHighestEarnerNames();
         assertEquals(List.of("B", "A"), topEarners);
+    }
+
+    @Test
+    void testGetHighestSalary_emptyList() throws Exception {
+        String emptyJson = """
+    {
+      "data": [],
+      "status": "success"
+    }
+    """;
+        JsonNode emptyList = objectMapper.readTree(emptyJson);
+
+        when(restTemplate.getForEntity(anyString(), eq(JsonNode.class))).thenReturn(ResponseEntity.ok(emptyList));
+
+        EmployeeServiceException ex =
+                assertThrows(EmployeeServiceException.class, () -> employeeService.getHighestSalary());
+
+        assertEquals("No employees found", ex.getMessage());
     }
 }
