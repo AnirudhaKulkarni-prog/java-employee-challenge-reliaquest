@@ -148,7 +148,9 @@ To resolve any errors, you must run **spotlessApply** task.
 
 ### Implementation :- 
 
+```text
 Features Implemented
+
 1.Fetch all employees
 2.Get employee by ID or name
 3.Create a new employee
@@ -156,28 +158,36 @@ Features Implemented
 5.Get highest salary among employees
 6.Get top 10 highest-earning employee names
 
-Each endpoint fetches or modifies data by interacting with a mock external API defined in the api/ module.
+
+
+```
 
 ### Prerequisites
+```text
 Java 17+
 Gradle 7.x
 Internet connection (for dependencies)
+```
 
 ### Start the Application
 
+```text
 cd server
 ./gradlew bootRun
+```
 
 ### Testing Strategy
+```text
 Unit Tests for service and controller layers
 Integration Tests using WireMock to simulate the external employee API
 
 All test payloads are extracted into reusable fixture JSON files under src/test/resources
 
 ./gradlew clean test
+```
 
 ### Directory Overview
-
+```text
 java-employee-challenge-reliaquest/
 │
 ├── api/                 # REST client module to talk to Mock Employee API
@@ -191,11 +201,14 @@ java-employee-challenge-reliaquest/
 ├── README.md            # (this file)
 ├── build.gradle         
 ├── settings.gradle
+```
 
 ### Tech Stack
+```text
 Java 17
 Spring Boot
 JUnit 5
 WireMock
 Gradle
+```
 
