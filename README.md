@@ -146,46 +146,37 @@ and style guidelines with every build.
 To resolve any errors, you must run **spotlessApply** task.
 `./gradlew spotlessApply`
 
+### Implementation :- 
 
-✅ Features Implemented
-Fetch all employees
-
-Get employee by ID or name
-
-Create a new employee
-
-Delete employee by name
-
-Get highest salary among employees
-
-Get top 10 highest-earning employee names
+Features Implemented
+1.Fetch all employees
+2.Get employee by ID or name
+3.Create a new employee
+4.Delete employee by name
+5.Get highest salary among employees
+6.Get top 10 highest-earning employee names
 
 Each endpoint fetches or modifies data by interacting with a mock external API defined in the api/ module.
 
-▶ How to Run
-Prerequisites
+### Prerequisites
 Java 17+
-
 Gradle 7.x
-
 Internet connection (for dependencies)
 
-Start the Application
-bash
-Copy
-Edit
+### Start the Application
+
 cd server
 ./gradlew bootRun
-🧪 Testing Strategy
-Unit Tests for service and controller layers
 
+### Testing Strategy
+Unit Tests for service and controller layers
 Integration Tests using WireMock to simulate the external employee API
 
 All test payloads are extracted into reusable fixture JSON files under src/test/resources
 
 ./gradlew clean test
 
-📂 Directory Overview
+### Directory Overview
 
 java-employee-challenge-reliaquest/
 │
@@ -201,14 +192,10 @@ java-employee-challenge-reliaquest/
 ├── build.gradle         
 ├── settings.gradle
 
-🛠 Tech Stack
+### Tech Stack
 Java 17
-
 Spring Boot
-
 JUnit 5
-
 WireMock
-
 Gradle
 
