@@ -58,11 +58,8 @@ Please include proper integration and/or unit tests.
 
 
 ✅ Implementation Summary
+
 This module (api) acts as a REST client abstraction for interacting with the Mock Employee API hosted at http://localhost:8112/api/v1/employee.
-
-Core logic is implemented in the service class:
-com.reliaquest.api.service.EmployeeService
-
 It uses RestTemplate for HTTP interactions and ObjectMapper (Jackson) to handle dynamic JSON (JsonNode).
 API response parsing and filtering are done in-memory as required (e.g., for top 10 earners).
 Exception handling and logging are included as part of production-ready standards.
@@ -95,8 +92,6 @@ All request/response JSON payloads are extracted to:
 src/test/resources/testdata/
 
 ▶️ How to Run Tests
-bash
-Copy
-Edit
+
 # From the project root
 ./gradlew clean test
