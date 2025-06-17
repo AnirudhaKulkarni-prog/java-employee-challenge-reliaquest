@@ -183,14 +183,10 @@ Integration Tests using WireMock to simulate the external employee API
 
 All test payloads are extracted into reusable fixture JSON files under src/test/resources
 
-bash
-Copy
-Edit
 ./gradlew clean test
+
 📂 Directory Overview
-bash
-Copy
-Edit
+
 java-employee-challenge-reliaquest/
 │
 ├── api/                 # REST client module to talk to Mock Employee API
